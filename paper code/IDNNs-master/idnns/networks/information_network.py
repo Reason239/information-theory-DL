@@ -44,7 +44,7 @@ class informationNetwork():
 		self.epochs_indexes = np.unique(
 			np.logspace(np.log2(args.start_samples), np.log2(args.num_ephocs), args.num_of_samples, dtype=int,
 			            base=2)) - 1
-		max_size = np.max([len(layers_size) for layers_size in self.layers_sizes])
+		max_size = np.max([len(layers_size) for layers_size in self.layers_sizes]) ## max depth
 		# load data
 		self.data_sets = load_data(self.name, args.random_labels)
 		# create arrays for saving the data
