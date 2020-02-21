@@ -1,2 +1,2 @@
 # information-theory-DL
- Course work by Kirill Tyshchuk
+ Term paper by Kirill Tyshchuk
