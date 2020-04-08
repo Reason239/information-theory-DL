@@ -1,0 +1,5 @@
+train accuracy: 0.98163635
+test accuracy: 0.9716
+
+train loss: 0.06189088
+test loss: 0.09122919{'Gamma': 0, 'activation': 'relu', 'hid': 1000, 'num_epochs': 1000, 'num_info': 50, 'alphas': 200}
