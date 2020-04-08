@@ -6,3 +6,4 @@ c = np.array([1, 2, 3])
 l = [a, b, c]
 
 print(np.dstack((ar for ar in l)))
+
