@@ -7,7 +7,7 @@ from mixture import Mixture
 
 
 if __name__ == '__main__':
-    means = np.array([[(1, 1), (-1, -1)], [(1, -1), (-1, 1)]]) * 10
+    means = np.array([[(1, 1), (-1, -1)], [(1, -1), (-1, 1)]]) * 2
     cov = np.eye(2)
     covs = np.array([[cov, cov], [cov, cov]])
     proportions = np.array([0.5, 0.5])
