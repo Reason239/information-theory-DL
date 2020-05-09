@@ -22,3 +22,10 @@ MI_datasets/test.py
 *.pyc
 MINE/test.py
 MI_datasets/MINE.py
+MI_datasets/__init__.py
+MI_datasets/mis.pkl
+MI_datasets/test.py
+*.iml
+*.xml
+MINE/__init__.py
+MINE/test.py
