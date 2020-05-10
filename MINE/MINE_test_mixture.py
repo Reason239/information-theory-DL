@@ -33,7 +33,7 @@ if dist not in precalculated.keys():
 true_mi = precalculated[dist]
 print('True MI: ', true_mi)
 
-mine_net = get_mine_model(input_shape=(3,), layer_sizes=[10, 10])
+mine_net = get_mine_model(input_shape=(3,), layer_sizes=[100, 100], leaky_alpha=0.0)
 # print(mine_net.summary())
 
 optimizer = keras.optimizers.Adam(learning_rate=0.005)
@@ -41,7 +41,7 @@ batch_size = 2000
 per_epoch = (2 * half_ds) // batch_size
 
 MI_bounds = []
-epochs = 40
+epochs = 80
 for e in tqdm(range(epochs), total=epochs):
     for i in range(per_epoch):
         ind_joint = np.random.randint(low=0, high=2 * half_ds, size=batch_size)
@@ -52,8 +52,8 @@ for e in tqdm(range(epochs), total=epochs):
         x_data_for_marginal = x_dataset[ind_marginal]
         y_data_for_marginal = y_dataset[ind_marginal]
 
-        data = get_data(x_data_for_joint, y_data_for_joint, x_data_for_marginal, y_data_for_marginal)
-        bound = training_step(mine_net, data, optimizer, ema_alpha=0.1)
+        data = get_data_for_mine(x_data_for_joint, y_data_for_joint, x_data_for_marginal, y_data_for_marginal)
+        bound = training_step(mine_net, data, optimizer, ema_alpha=None)
         MI_bounds.append(bound)
 
 estimated_mi = sum(MI_bounds[-100:]) / 100

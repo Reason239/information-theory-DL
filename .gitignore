@@ -29,3 +29,7 @@ MI_datasets/test.py
 *.xml
 MINE/__init__.py
 MINE/test.py
+MI_datasets/test.py
+*.iml
+*.xml
+MINE/test.py

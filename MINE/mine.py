@@ -4,8 +4,10 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Activation, LeakyReLU
 import numpy as np
 
+EPS = tf.cast(1e-8, dtype=tf.float32)
 
-def get_data(x1, z1, x2, z2):
+
+def get_data_for_mine(x1, z1, x2, z2):
     x1 = tf.convert_to_tensor(x1, dtype=tf.float32)
     z1 = tf.convert_to_tensor(z1, dtype=tf.float32)
     x2 = tf.convert_to_tensor(x2, dtype=tf.float32)
@@ -43,6 +45,14 @@ def training_step(mine_net, data, optimizer=None, learning_rate=0.001, ema_alpha
     inp_joint, inp_marginal = data
     net_weights = mine_net.trainable_weights
 
+    # m = -1
+    for weight in net_weights:
+        tf.debugging.assert_all_finite(weight, 'net weight', name=None)
+        # m = max(m, np.max(np.abs(weight.numpy())))
+    # if m > 10:
+    #     print(m)
+
+
     if ema_alpha is None:
         # without corrected gradients
         # forward pass
@@ -69,6 +79,12 @@ def training_step(mine_net, data, optimizer=None, learning_rate=0.001, ema_alpha
             # to calculate mean(grad * exponents) we can take the gradient of mean(exponents)
             mean_exp_marginal = tf.reduce_mean(tf.exp(out_marginal))
 
+            # check for problems
+            tf.debugging.assert_all_finite(out_joint, 'out joint', name=None)
+            tf.debugging.assert_all_finite(mean_out_joint, 'mean out joint', name=None)
+            tf.debugging.assert_all_finite(out_marginal, 'out marginal', name=None)
+            tf.debugging.assert_all_finite(mean_exp_marginal, 'mean exp', name=None)
+
         # evaluate lower bond on MI outside of the tape
         # batch_size_float32 = tf.cast(out_joint.shape[0], dtype=tf.float32)
         lower_bound = tf.reduce_mean(out_joint) - tf.math.log(mean_exp_marginal)
@@ -87,6 +103,7 @@ def training_step(mine_net, data, optimizer=None, learning_rate=0.001, ema_alpha
             denominator = mean_exp_marginal
         else:
             denominator = ema_alpha * mean_exp_marginal + (1 - ema_alpha) * prev_denom
+        # denominator += EPS
 
         # now we can build our gradients
         # append minus because we want to maximize
