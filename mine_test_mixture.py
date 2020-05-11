@@ -7,7 +7,7 @@ from mine import *
 
 
 dist = 1.2
-with open('precalc_mi.pkl', 'rb') as f:
+with open('saved/precalc_mi.pkl', 'rb') as f:
     precalculated = pickle.load(f)
 means = np.array([[(1, 1), (-1, -1)], [(1, -1), (-1, 1)]]) * 1.2
 cov = np.eye(2)
@@ -27,7 +27,7 @@ y_dataset = np.concatenate((y_0, y_1), axis=0)
 if dist not in precalculated.keys():
     print('Calculating true MI...')
     precalculated[dist] = mix.get_MI()[0]
-    with open('precalc_mi.pkl', 'wb') as f:
+    with open('saved/precalc_mi.pkl', 'wb') as f:
         pickle.dump(precalculated, f)
 
 true_mi = precalculated[dist]

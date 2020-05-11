@@ -1,5 +1,4 @@
 
-MINE/IrisNET.py
 tishby_plots/test.py
 tishby_plots/.idea/workspace.xml
 tishby_plots/.idea/inspectionProfiles/profiles_settings.xml
@@ -13,9 +12,9 @@ MI_datasets/.idea/inspectionProfiles/profiles_settings.xml
 MI_datasets/.idea/MI_datasets.iml
 MI_datasets/.idea/misc.xml
 MI_datasets/.idea/modules.xml
-MI_datasets/test.py
+test_mixture.py
 MI_datasets/test2.py
-MI_datasets/test.py
+test_mixture.py
 *.iml
 *.xml
 *.xml
@@ -23,13 +22,14 @@ MI_datasets/test.py
 MINE/test.py
 MI_datasets/MINE.py
 MI_datasets/__init__.py
-MI_datasets/mis.pkl
-MI_datasets/test.py
+saved/mis.pkl
+test_mixture.py
 *.iml
 *.xml
 MINE/__init__.py
 MINE/test.py
-MI_datasets/test.py
+test_mixture.py
 *.iml
 *.xml
 MINE/test.py
+__init__.py

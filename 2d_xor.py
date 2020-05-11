@@ -1,7 +1,4 @@
-from scipy import integrate
 import numpy as np
-import random
-from scipy.stats import multivariate_normal
 import matplotlib.pyplot as plt
 from mixture import Mixture
 

@@ -52,16 +52,16 @@ for rho, true, hist in list(zip(rhos, true_mi, lb_history))[2:3]:
     mine_mi.append(mean)
     print(
         f'dim={dim_each:2d} rho={rho:5.2f} true_mi={true:5.3f} mine_mi={mean:5.3f} +- {std:5.3f} error={abs(true - mean):5.3f}')
-#
-# fig, ax = plt.subplots()
-# ax.plot(rhos, true_mi, label='True MI')
-# ax.plot(rhos, mine_mi, label='MINE estimates')
-# plt.xlabel('rho')
-# plt.ylabel('MI')
-# plt.title(f'Multivariate gaussians, joint dimension = {2 * dim_each}')
-# plt.legend()
-# fig.savefig(f'plots/gaussians_dim_{2 * dim_each}_epochs_{epochs}.png')
-# plt.show()
+
+fig, ax = plt.subplots()
+ax.plot(rhos, true_mi, label='True MI')
+ax.plot(rhos, mine_mi, label='MINE estimates')
+plt.xlabel('rho')
+plt.ylabel('MI')
+plt.title(f'Multivariate gaussians, joint dimension = {2 * dim_each}')
+plt.legend()
+fig.savefig(f'plots/mine_testing/gaussians_dim_{2 * dim_each}_epochs_{epochs}.png')
+plt.show()
 
 x_plot = np.arange(epochs * per_epoch)
 true = np.ones(epochs * per_epoch) * true_mi[2]

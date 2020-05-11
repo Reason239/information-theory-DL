@@ -3,8 +3,8 @@ from tqdm import tqdm
 import numpy as np
 from mine import *
 
-x = np.load('../tishby_data/data.npy')
-y = np.load('../tishby_data/labels.npy')[:, 0:1]
+x = np.load('tishby_data/data.npy')
+y = np.load('tishby_data/labels.npy')[:, 0:1]
 
 
 input_shape = (13,)
