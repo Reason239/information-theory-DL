@@ -33,3 +33,12 @@ test_mixture.py
 *.xml
 MINE/test.py
 __init__.py
+dogs-vs-cats/sampleSubmission.csv
+*.jpg
+dogs-vs-cats/test1.zip
+dogs-vs-cats/train.zip
+measure_tishby_for_colab.ipynb
+paper code/IDNNs-master/jobs/net_sampleLen=1_nDistSmpls=1_layerSizes=10,7,5,4,3_nEpoch=10_batch=512_nRepeats=1_nEpochInds=9_LastEpochsInds=8_DataName=var_u_lr=0.0004/examine data.ipynb
+*.npy
+scratch.py
+unnamed_plot.png

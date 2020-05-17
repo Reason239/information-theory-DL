@@ -39,7 +39,8 @@ def plot_all_epochs(I_XT_array, I_TY_array, epochs_inds, title_str='', save_name
     for index_in_range in range(num_info_epochs):
         XT = I_XT_array[index_in_range, :]
         TY = I_TY_array[index_in_range, :]
-        axes.plot(XT[:], TY[:], marker='o', linestyle='-', markersize=12, markeredgewidth=0.01,
+        marker = 'o'
+        axes.plot(XT[:], TY[:], marker=marker, linestyle='-', markersize=12, markeredgewidth=0.01,
                   linewidth=0.2, color=colors[int(epochs_inds[index_in_range])])
 
     # Save the figure and add color bar
@@ -54,4 +55,4 @@ def plot_all_epochs(I_XT_array, I_TY_array, epochs_inds, title_str='', save_name
     cbar.ax.text(0.5, 1.0, epochs_inds[-1], transform=cbar.ax.transAxes,
                  va='bottom', ha='center', size=bar_font)
 
-    f.savefig(save_name + '.jpg', dpi=500, format='jpg')
+    f.savefig(save_name + '.png', dpi=500, format='png')
