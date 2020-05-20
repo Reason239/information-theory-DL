@@ -6,7 +6,7 @@ from tensorflow.keras.optimizers import Adam
 from datetime import datetime
 
 from mine import get_lower_bound, get_data_for_mine, mine_inp_train, mine_out_train
-from models import get_tishby_net, get_intermediate_model, get_mine_for_input, get_mine_for_output
+from getting_models import get_tishby_net, get_intermediate_model, get_mine_for_input, get_mine_for_output
 from tishby_plots.plots_refactored import plot_all_epochs
 from utils import add_noise, get_info_ind_log
 

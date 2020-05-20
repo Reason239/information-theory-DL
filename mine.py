@@ -1,12 +1,16 @@
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, LeakyReLU
 import numpy as np
 
 from utils import add_noise
 
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-tf.config.experimental.set_memory_growth(physical_devices[0], True)
+try:
+    physical_devices = tf.config.experimental.list_physical_devices('GPU')
+    tf.config.experimental.set_memory_growth(physical_devices[0], True)
+except Exception:
+    print('Gpu set_memory_growth failed')
+    pass
 
 EPS = tf.cast(1e-8, dtype=tf.float32)
 
@@ -30,7 +34,20 @@ def get_data_for_mine(x1, z1, z2, subtract=False):
     return joint, marginal
 
 
-def get_mine_model(input_shape, layer_sizes, leaky_alpha=0.2):
+def shuffle_and_process(x, z, subtract=False):
+    length = len(x)
+    assert length % 2 == 0
+    order = np.arange(length)
+    np.random.shuffle(order)
+    x = x[order]
+    z = z[order]
+    x1, x2 = np.split(x, 2)
+    z1, z2 = np.split(z, 2)
+    return get_data_for_mine(x1, z1, z2, subtract)
+
+
+
+def get_mine_model(input_shape, layer_sizes, leaky_alpha=0.2) -> Model:
     """Build a MINE model"""
     mine_net = Sequential()
     mine_net.add(Dense(layer_sizes[0], input_shape=input_shape))

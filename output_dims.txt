@@ -1,0 +1,8 @@
+MobileNet       : 1024
+DenseNet121     : 1024
+ResNet50        : 2048
+ResNet50V2      : 2048
+ResNet101       : 2048
+ResNet101V2     : 2048
+InceptionV3     : 2048
+Xception        : 2048
