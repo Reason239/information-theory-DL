@@ -23,8 +23,7 @@ def get_data(name):
     else:
         raise ValueError
 
-
-
+# get labels
 labels = np.load('saved/labels_test.npy')
 mi = defaultdict(dict)
 stds = defaultdict(dict)
@@ -43,10 +42,10 @@ for model_name, stop in product(model_names, stops):
     predictions = np.load(f'saved/predictions_test/{id}.npy')
     predictions /= np.max(np.abs(predictions))
 
+    # hyperparameters, nets, optimizers
     ema_alpha = 0.05
     eval_num = 10
     noise_var = 0.125
-
     # x is input, e is embedding, p is prediction, l is label
     epochs_x_e = 750
     epochs_p_l = 400
@@ -61,11 +60,13 @@ for model_name, stop in product(model_names, stops):
     optimizer_p_l = Adam(mine_lr_p_l)
     optimizer_e_l = Adam(mine_lr_e_l)
 
+    # arrange MINE nets and optimizers
     pairs = [('embeddings', 'embeddings + noise'), ('predictions', 'labels'), ('embeddings', 'labels')]
     mine_nets = [mine_net_x_e, mine_net_p_l, mine_net_e_l]
     optimizers = [optimizer_x_e, optimizer_p_l, optimizer_e_l]
     epoch_nums = [epochs_x_e, epochs_p_l, epochs_e_l]
 
+    # train MINEs, get MI estimations, plot results
     for (x, z), epochs, mine_net, optimizer in list(zip(pairs, epoch_nums, mine_nets, optimizers)):
         MI_bounds = []
         denominator = None
@@ -97,6 +98,7 @@ for model_name, stop in product(model_names, stops):
         plt.savefig(f'plots/measure_big_nets/{x}_{z}_{id}.png')
         plt.clf()
 
+# save measured MI
 with open('saved/mutual_informations.pkl', 'wb') as f:
     pkl.dump(mi, f)
 with open('saved/mutual_information_stds.pkl', 'wb') as f:

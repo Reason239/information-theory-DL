@@ -6,11 +6,13 @@ from itertools import product
 import pandas as pd
 from pandas.plotting import scatter_matrix
 
-
+# get classifiers' losses and accuracies
 with open('saved/classifier_results.pkl', 'rb') as f:
     classifier_results = pkl.load(f)
 losses = classifier_results['loss']
 accuracies = classifier_results['accuracy']
+
+# get precalculatem MIs
 with open('saved/mutual_informations.pkl', 'rb') as f:
     mis = pkl.load(f)
 mi_x_e = mis['I(embeddings, embeddings + noise)']
@@ -28,7 +30,7 @@ model_names = ['ResNet50', 'ResNet50V2', 'ResNet101', 'ResNet101V2', 'InceptionV
 # stops = [1]
 stops = [1, 30, 200]
 
-
+# average values that shoud not depend on the epoch
 for dic in [mi_x_e, mi_e_l]:
     for name in model_names:
         avg = sum([dic[f'{name}_{stop}'] for stop in stops]) / 3
@@ -36,19 +38,8 @@ for dic in [mi_x_e, mi_e_l]:
             dic[f'{name}_{stop}'] = avg
 
 
-#
-# for stop, model_name in product(stops, model_names):
-#     observations = []
-#     id = f'{model_name}_{stop}'
-#     observations.append(np.array([dic[id] for dic in dicts]))
-#
-#     observations = np.array(observations)
-#
-#     # pprint(mis)
-#
-#     pprint(np.corrcoef(observations))
+# print correlation matrices
 dfs = {}
-#
 for stop in stops:
     pandas_dict = {name: [dic[f'{model_name}_{stop}'] for model_name in model_names]
                    for dic, name in zip(dicts, dict_names)}
@@ -59,7 +50,7 @@ for stop in stops:
 #     plt.show()
 #
 
-#
+# # plot results
 # fig, axes = plt.subplots(2, 3, sharex=False)
 # axes = axes.reshape((6,))
 # ticks = [1, 2, 3]
