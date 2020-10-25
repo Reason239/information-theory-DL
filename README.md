@@ -1,6 +1,10 @@
 # information-theory-DL
 Term paper by Kirill Tyshchuk
 
+(See the paper in [Tyshchuk.pdf](https://github.com/Reason239/information-theory-DL/blob/master/Tyshchuk.pdf) (in Russian)
+
+### Structure of work:
+
 Examining neural networks with modern methods of mutual information estimation.
 
 * Implementing MINE (mine.py)
@@ -9,7 +13,7 @@ Examining neural networks with modern methods of mutual information estimation.
 * Get embeddings from ResNets, Inception and Xception networks on cats vs dogs dataset and train classifiers on them. (images_to_embeddings.py, train_classifier.py, embeddings_to_predictions.py)
 * Use MINE to measure mutual information in the networks (measure_tishby.py, measure_big_nets.py, analyze_results.py)
 
-Structure of directories and files:
+### Structure of directories and files:
 
 #### paper code
 
